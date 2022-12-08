@@ -1,0 +1,84 @@
+<?xml version="1.1" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
+
+    <property name="autoIncrement" value="true"/>
+    <changeSet author="dqtuan" id="202210091607-1">
+        <createTable tableName="service_provider">
+            <column name="id" type="bigint" autoIncrement="${autoIncrement}">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="service_name" type="varchar(250)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="service_key" type="varchar(250)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="enabled" type="tinyint(1)" />
+        </createTable>
+
+        <createTable tableName="tb_token">
+            <column name="access_token" type="varchar(36)">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="jwt_token" type="text">
+                <constraints nullable="false"/>
+            </column>
+            <column name="refresh_token" type="text">
+                <constraints nullable="false"/>
+            </column>
+            <column name="user_id" type="varchar(36)" />
+        </createTable>
+
+        <createTable tableName="tb_payment_transaction">
+            <column name="id" type="varchar(36)">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="transaction_id" type="varchar(36)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="item" type="varchar(100)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="item_description" type="varchar(200)" />
+            <column name="balance_type" type="varchar(50)" />
+            <column name="amount" type="varchar(10)" />
+            <column name="currency" type="varchar(45)" />
+            <column name="msisdn" type="varchar(20)" />
+            <column name="created_at" type="timestamp(3)" defaultValueDate="CURRENT_DATE">
+                <constraints nullable="false"/>
+            </column>
+            <column name="deleted_at" type="timestamp(3)"/>
+        </createTable>
+
+        <createTable tableName="tb_payment_status">
+            <column name="id" type="varchar(36)">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="msisdn" type="varchar(20)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="ref_id" type="varchar(36)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="response_code" type="char(2)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="message_desc" type="varchar(200)"/>
+            <column name="created_at" type="timestamp(3)" defaultValueDate="CURRENT_DATE">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet author="dqtuan" id="202210091607-2">
+		<!--        <loadData file="liquibase/data/service_provider.csv"-->
+		<!--                  separator=";"-->
+		<!--                  tableName="service_provider"/>-->
+		<!-- cmcGlobal/f1ea84691f28 - DCB/d4ebe9557c88 -->
+        <sqlFile path="../data/service_provider.sql" relativeToChangelogFile="true" />
+        <sqlFile path="../data/customers.sql" relativeToChangelogFile="true" />
+    </changeSet>
+</databaseChangeLog>

@@ -1,0 +1,35 @@
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/postgres
+    username: cmcglobal
+    password: "cmcglobal#dkr"
+
+  jpa:
+    properties:
+      hibernate:
+        jdbc:
+          lob:
+            non_contextual_creation: true
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+
+  liquibase:
+    change-log: classpath:liquibase/master.xml
+    defaultSchema: public
+
+  cache:
+    jcache:
+      config: classpath:ehcache.xml
+server:
+  port: 6666
+app:
+  jwtSecret: cmcGlobal
+  jwtExpirationInMs: 3600000
+  prefix: Bearer
+
+dcb:
+  service-key: f1ea84691f28
+  service-name: cmcGlobal
+# Other pair key/name: DCB/d4ebe9557c88
+
+operator:
+  service-url: http://localhost:6666

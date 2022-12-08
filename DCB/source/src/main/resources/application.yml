@@ -1,0 +1,33 @@
+spring:
+  # Database config.
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3336/dcb_mysql
+    username: cmcglobal
+    password: "cmcglobal#dkr"
+  # JPA config.
+  jpa:
+    show-sql: false
+    hibernate:
+      ddl-auto: none
+      dialect: org.hibernate.dialect.MySQL8Dialect
+  liquibase:
+    change-log: classpath:liquibase/master.xml
+  cache:
+    jcache:
+      config: classpath:ehcache.xml
+server:
+  port: 8888
+app:
+  jwtSecret: cmcGlobal
+  jwtExpirationInMs: 3600000
+  prefix: Bearer
+
+dcb:
+  service-key: f1ea84691f28
+  service-name: cmcGlobal
+# Other pair key/name: DCB/d4ebe9557c88
+
+# please change IP properly.
+operator:
+  service-url: http://localhost:6666

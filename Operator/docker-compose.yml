@@ -1,0 +1,28 @@
+version: '3'
+services:
+  dcb:
+    container_name: dcb-container
+    image: dcb-image
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+      args:
+        APP_NAME_ARG: DCB-system
+        WAR_NAME_ARG: dcb.war
+        DATABASE_NAME_ARG: dcb
+        MASTER_USERNAME_ARG: homeo
+        MASTER_PASSWORD_ARG: Pax96dQ2UtNa
+        DATABASE_PORT_ARG: 3336
+    volumes:
+      - ./DCB/build/libs/origin-0.0.1-SNAPSHOT.war:/var/dcb/dcb.war
+      - ./libs:/root/.gradle/
+    restart: always
+    ports:
+      - 8866:8080
+    networks: 
+      - dcb_net
+
+networks:
+  dcb_net:
+    name: dcb_network
+    driver: "bridge"

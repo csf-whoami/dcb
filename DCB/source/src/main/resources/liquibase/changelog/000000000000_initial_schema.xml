@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
+
+    <property name="now" value="now(3)"/>
+    <changeSet author="dqtuan" id="202210081607-1">
+        <createTable tableName="tb_customer">
+            <column name="id" type="varchar(36)">
+                <constraints primaryKey="true" primaryKeyName="tb_customer_pk"/>
+            </column>
+            <column name="customer_name" type="varchar(45)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="mobile_no" type="varchar(20)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="created_at" type="timestamp(3)" defaultValueDate="${now}">
+                <constraints nullable="false"/>
+            </column>
+            <column name="deleted_at" type="timestamp(3)"/>
+        </createTable>
+    </changeSet>
+</databaseChangeLog>

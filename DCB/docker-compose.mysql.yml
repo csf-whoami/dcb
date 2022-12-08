@@ -1,0 +1,21 @@
+version: '3.5'
+services:
+  dcb_mysql:
+    container_name: dcb_mysql
+    image: mysql:8.0.25
+    environment:
+      MYSQL_ROOT_PASSWORD: cmcglobal#dkr
+      MYSQL_DATABASE: dcb_mysql
+      MYSQL_USER: cmcglobal
+      MYSQL_PASSWORD: cmcglobal#dkr
+      command: mysqld --lower_case_table_names=1 --skip-ssl --character_set_server=utf8 --explicit_defaults_for_timestamp
+    ports:
+      - 3336:3306
+    restart: on-failure
+    networks: 
+      - dcb_net
+
+networks:
+  dcb_net:
+    name: dcb_network
+    driver: "bridge"
